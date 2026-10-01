@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+
+void sortStrings(char arr[][10], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int min_idx = i;
+        for (int j = i + 1; j < n; j++) {
+            if (strcmp(arr[j], arr[min_idx]) < 0) {
+                min_idx = j;
+            }
+        }
+        char temp[10];
+        strcpy(temp, arr[min_idx]);
+        strcpy(arr[min_idx], arr[i]);
+        strcpy(arr[i], temp);
+    }
+}
+
+int main() {
+    char arr[5][10] = {"Zebra", "Apple", "Mango", "Cat", "Banana"};
+    int n = 5;
+    
+    sortStrings(arr, n);
+    
+    printf("Sorted strings: ");
+    for (int i = 0; i < n; i++) printf("%s ", arr[i]);
+    return 0;
+}
