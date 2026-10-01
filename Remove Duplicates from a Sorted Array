@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int removeDuplicates(int arr[], int n) {
+    if (n == 0 || n == 1) return n;
+
+    int slow = 0; // Tracks the unique element boundary
+
+    for (int fast = 1; fast < n; fast++) {
+        // If a new unique element is found
+        if (arr[fast] != arr[slow]) {
+            slow++;
+            arr[slow] = arr[fast]; // Move it forward
+        }
+    }
+    return slow + 1; // New size of the array without duplicates
+}
+
+int main() {
+    int arr[] = {1, 1, 2, 2, 3, 4, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int new_size = removeDuplicates(arr, n);
+
+    printf("Array after removing duplicates: ");
+    for (int i = 0; i < new_size; i++) printf("%d ", arr[i]);
+    printf("\n");
+    return 0;
+}
