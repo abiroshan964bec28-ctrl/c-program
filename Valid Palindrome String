@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int isPalindrome(char str[]) {
+    int left = 0;
+    int right = strlen(str) - 1;
+
+    while (left < right) {
+        // Move left pointer forward if not alphanumeric
+        while (left < right && !isalnum(str[left])) left++;
+        // Move right pointer backward if not alphanumeric
+        while (left < right && !isalnum(str[right])) right--;
+
+        // Compare characters (case-insensitive)
+        if (tolower(str[left]) != tolower(str[right])) {
+            return 0; // Not a palindrome
+        }
+        left++;
+        right--;
+    }
+    return 1; // It is a palindrome
+}
+
+int main() {
+    char str[] = "A man, a plan, a canal: Panama";
+
+    if (isPalindrome(str)) {
+        printf("\"%s\" is a palindrome.\n", str);
+    } else {
+        printf("\"%s\" is NOT a palindrome.\n", str);
+    }
+    return 0;
+}
